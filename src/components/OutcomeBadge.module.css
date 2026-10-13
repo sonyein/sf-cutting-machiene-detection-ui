@@ -1,4 +1,4 @@
-.badge { display: inline-flex; align-items: center; padding: 1px 6px; border-radius: 3px; font-size: 11px; line-height: 18px; font-weight: 500; white-space: nowrap; }
+.badge { display: inline-flex; align-items: center; padding: 1px 6px; border-radius: 3px; font-size: 12px; line-height: 18px; font-weight: 500; white-space: nowrap; }
 .resolved { background: var(--green-50); color: color-mix(in srgb, var(--green-900) 35%, var(--gray-700)); }
 .improved { background: color-mix(in srgb, var(--blue-tint) 60%, white); color: color-mix(in srgb, var(--blue-700) 35%, var(--gray-700)); }
 .monitoring { background: color-mix(in srgb, var(--yellow-50) 60%, white); color: color-mix(in srgb, var(--yellow-900) 35%, var(--gray-700)); }

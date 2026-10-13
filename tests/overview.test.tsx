@@ -83,7 +83,7 @@ describe('설비 전체 진단 화면의 사용자 흐름', () => {
     expect(button('7일').getAttribute('aria-pressed')).toBe('true')
     expect(button('24시간').getAttribute('aria-pressed')).toBe('false')
     expect(container.querySelector('[data-testid="trend"]')?.getAttribute('data-period')).toBe('7d')
-    expect(container.textContent).toContain('7일 구간')
+    expect(container.textContent).toContain('2026.10.06 09:30–10.13 09:30 (KST)')
   })
 
   it('HI 기준 모달을 열고 닫는다', async () => {

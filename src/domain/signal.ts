@@ -18,12 +18,22 @@ export function extractSignalFeatures(readings: readonly Reading[]) {
 }
 export function signalWindow(readings: readonly Reading[], cursor: number, windowSeconds: number, sampleRate: number): Reading[] {
   const start = Math.max(0, cursor - windowSeconds)
-  return readings.slice(Math.ceil(start * sampleRate), Math.floor(cursor * sampleRate) + 1)
+  // Avoid excluding an exact boundary sample due to binary floating point (e.g. 35.2 * 200).
+  const tolerance = 1e-9
+  return readings.slice(Math.ceil(start * sampleRate - tolerance), Math.floor(cursor * sampleRate + tolerance) + 1)
+}
+// The initial viewport remains the chosen width; only the samples up to the cursor are replayed.
+export function signalViewport(cursor: number, windowSeconds: number, duration: number) {
+  const position = Math.min(duration, Math.max(0, cursor))
+  return { start: Math.max(0, position - windowSeconds), end: Math.min(duration, Math.max(position, windowSeconds)) }
 }
 export function advancePlayback(mediaStart: number, wallStartMs: number, wallNowMs: number, speed: number, duration: number): number {
   return Math.min(duration, Math.max(0, mediaStart + Math.max(0, wallNowMs - wallStartMs) / 1000 * speed))
 }
-export function formatElapsed(seconds: number): string {
-  const whole = Math.floor(seconds)
-  return `${Math.floor(whole / 60).toString().padStart(2, '0')}:${(whole % 60).toString().padStart(2, '0')}`
+export function formatElapsed(seconds: number, precision: 0 | 1 = 0): string {
+  const scale = 10 ** precision
+  const ticks = precision ? Math.round(seconds * scale) : Math.floor(seconds)
+  const minutes = Math.floor(ticks / (60 * scale))
+  const remainder = (ticks % (60 * scale)) / scale
+  return `${minutes.toString().padStart(2, '0')}:${remainder.toFixed(precision).padStart(precision ? 4 : 2, '0')}`
 }

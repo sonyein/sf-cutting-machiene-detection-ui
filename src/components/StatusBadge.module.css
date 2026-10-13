@@ -4,5 +4,5 @@
 .watch { --badge-accent: var(--yellow-900); --badge-tint: var(--yellow-50); color: var(--badge-accent); background: var(--badge-tint); }
 .warning { --badge-accent: var(--orange-900); --badge-tint: var(--orange-50); color: var(--badge-accent); background: var(--badge-tint); }
 .danger { --badge-accent: var(--red-700); --badge-tint: var(--red-50); color: var(--badge-accent); background: var(--badge-tint); }
-.subtle { gap: 0; padding: 1px 6px; border-radius: 3px; font-size: 11px; line-height: 18px; font-weight: 500; color: color-mix(in srgb, var(--badge-accent) 35%, var(--gray-700)); background: color-mix(in srgb, var(--badge-tint) 60%, white); }
+.subtle { gap: 0; padding: 1px 6px; border-radius: 3px; font-size: 12px; line-height: 18px; font-weight: 500; color: color-mix(in srgb, var(--badge-accent) 35%, var(--gray-700)); background: color-mix(in srgb, var(--badge-tint) 60%, white); }
 .subtle .dot { display: none; }

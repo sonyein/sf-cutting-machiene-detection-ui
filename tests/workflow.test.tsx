@@ -4,6 +4,8 @@ import { createRoot } from 'react-dom/client'
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import App from '../src/App'
 import { inspectionRepository, INSPECTION_STORAGE_KEY } from '../src/services/inspectionRepository'
+import { sensorRepository } from '../src/services/sensorRepository'
+import { extractSignalFeatures, signalWindow } from '../src/domain/signal'
 
 vi.mock('../src/components/HealthTrend', () => ({ default: ({ period }: { period: string }) => <div data-testid="hi-trend" data-period={period} /> }))
 vi.mock('../src/components/SensorChart', () => ({ default: ({ signal, cursor, windowSeconds }: { signal: { config: { id: string } }; cursor: number; windowSeconds: number }) => <div data-testid="sensor-chart" data-sensor={signal.config.id} data-cursor={cursor} data-window={windowSeconds} /> }))
@@ -51,16 +53,52 @@ describe('상세 진단과 점검 이력 사용자 흐름', () => {
   })
   it('원신호 구간·탐색 위치·배속과 HI 기간을 변경한다', async () => {
     await route('/diagnosis/blade')
-    await act(async () => { button('10초').click() })
+    await act(async () => { button('최근 10초').click() })
     expect(container.querySelector('[data-testid="sensor-chart"]')?.getAttribute('data-window')).toBe('10')
     await change('[aria-label="원신호 재생 위치"]', '45')
     expect(container.querySelector('[data-testid="sensor-chart"]')?.getAttribute('data-cursor')).toBe('45')
-    expect(container.querySelector('output')?.textContent).toBe('00:45 / 02:00')
+    expect(container.querySelector('output')?.textContent).toBe('00:45.0 / 02:00.0')
     await change('[aria-label="원신호 재생 속도"]', '2')
     expect(container.querySelector<HTMLSelectElement>('[aria-label="원신호 재생 속도"]')?.value).toBe('2')
     await act(async () => { button('처음으로').click(); button('7일').click() })
-    expect(container.querySelector('output')?.textContent).toBe('00:00 / 02:00')
+    expect(container.querySelector('output')?.textContent).toBe('00:00.0 / 02:00.0')
     expect(container.querySelector('[data-testid="hi-trend"]')?.getAttribute('data-period')).toBe('7d')
+  })
+  it('기록 끝의 재시작을 알리고, 처음부터 재생하면 위치를 0으로 되돌린다', async () => {
+    vi.spyOn(window, 'requestAnimationFrame').mockReturnValue(1)
+    vi.spyOn(window, 'cancelAnimationFrame').mockImplementation(() => {})
+    await route('/diagnosis/blade')
+    expect(container.textContent).toContain('기록 끝입니다. 처음부터 재생을 누르면 00:00에서 시작합니다.')
+    await act(async () => { button('처음부터 재생').click() })
+    expect(container.querySelector('[data-testid="sensor-chart"]')?.getAttribute('data-cursor')).toBe('0')
+    expect(button('일시정지')).toBeDefined()
+    expect(container.textContent).toContain('그래프 시간축 00:00.0–00:30.0')
+    expect(container.textContent).toContain('분석 구간 00:00.0–00:00.0')
+    await act(async () => { button('일시정지').click() })
+  })
+  it('표시한 분석 구간·특징값·단위가 선택 센서의 재생된 표본과 일치한다', async () => {
+    await route('/diagnosis/blade')
+    await act(async () => { button('최근 10초').click() })
+    await change('[aria-label="원신호 재생 위치"]', '5.2')
+    const vibration = sensorRepository.getSignal('blade', 'vibration')
+    const expected = extractSignalFeatures(signalWindow(vibration.readings, 5.2, 10, vibration.config.sampleRate))!
+    const value = [...container.querySelectorAll('.data-table tbody tr')].find((row) => row.firstElementChild?.textContent === 'RMS')!
+    expect(value.querySelector('strong')?.textContent).toBe(expected.rms.toFixed(2))
+    expect(value.textContent).toContain('mm/s')
+    expect(container.textContent).toContain('그래프 시간축 00:00.0–00:10.0')
+    expect(container.textContent).toContain('분석 구간 00:00.0–00:05.2')
+    expect(container.textContent).toContain('1,041개 표본')
+    await act(async () => { button('전류').click() })
+    const current = sensorRepository.getSignal('blade', 'current')
+    const currentExpected = extractSignalFeatures(signalWindow(current.readings, 120, 10, current.config.sampleRate))!
+    const row = [...container.querySelectorAll('.data-table tbody tr')].find((item) => item.firstElementChild?.textContent === '평균 전류')!
+    expect(row.querySelector('strong')?.textContent).toBe(currentExpected.mean.toFixed(2))
+    expect(row.textContent).toContain('A')
+    expect(container.textContent).toContain('분석 구간 01:50.0–02:00.0')
+    expect(container.textContent).toContain('1,001개 표본')
+    await change('[aria-label="원신호 재생 위치"]', '0')
+    expect(container.textContent).toContain('계산 불가')
+    expect(container.textContent).toContain('현재 예시 HI0.78')
   })
   it('입력 검증 후 저장하고 이력 및 새로 렌더링한 화면에서 기록을 찾는다', async () => {
     await route('/diagnosis/blade'); await act(async () => { button('점검 결과 입력').click() })
@@ -83,6 +121,8 @@ describe('상세 진단과 점검 이력 사용자 흐름', () => {
     await act(async () => { button('저장 이력 보기').click(); await new Promise((resolve) => setTimeout(resolve, 0)) })
     expect(container.querySelector('h1')?.textContent).toBe('점검 이력')
     expect(container.querySelector('[aria-label="점검 상세 정보"]')?.textContent).toContain('다음 점검 때 절삭면 재확인')
+    expect(container.querySelector('[aria-label="점검 상세 정보"]')?.textContent).toContain('저장 시 HI')
+    expect(container.querySelector('[aria-label="점검 상세 정보"]')?.textContent).toContain('점검 일자의 실측값이 아닙니다.')
     await act(async () => { root.unmount(); inspectionRepository.refresh(); root = createRoot(container); root.render(<App />) })
     expect(container.textContent).toContain('커팅날 마모 재확인')
     await route('/')
@@ -104,12 +144,42 @@ describe('상세 진단과 점검 이력 사용자 흐름', () => {
   it('유사 사례와 조치 가이드의 근거 기록을 실제로 선택한다', async () => {
     await route('/history?point=blade&record=example-1')
     const original = container.querySelector('[aria-label="점검 상세 정보"]')!
-    expect(original.textContent).toContain('유사 사례'); expect(original.textContent).toContain('과거 조치 참고')
+    expect(container.querySelector('#history-tab-details')?.getAttribute('aria-selected')).toBe('true')
+    expect(container.querySelector('#similar-heading')).toBeNull(); expect(container.querySelector('#guide-heading')).toBeNull()
+    expect(container.querySelectorAll('[role="tabpanel"]')).toHaveLength(1)
+    await act(async () => { button('유사 사례').click() })
+    expect(original.textContent).toContain('일치 키워드 · 마모')
+    expect(container.querySelector('#guide-heading')).toBeNull()
     const related = container.querySelector<HTMLButtonElement>('#similar-heading + p + button')!
     await act(async () => { related.click() })
     expect(original.textContent).toContain('2026.09.14')
+    expect(container.querySelector('#history-tab-details')?.getAttribute('aria-selected')).toBe('true')
+    expect(container.querySelector('#similar-heading')).toBeNull()
+    await act(async () => { button('조치 참고').click() })
+    expect(original.textContent).toContain('모델이 생성한 권장 조치가 아니며')
     await act(async () => { button('근거 기록 보기').click() })
     expect(original.textContent).toContain('2026.10.07')
+    expect(container.querySelector('#history-tab-details')?.getAttribute('aria-selected')).toBe('true')
+    expect(container.querySelector('#guide-heading')).toBeNull()
+    await act(async () => { button('조치 참고').click() })
+    await act(async () => { button('근거 기록 보기').click() })
+    expect(container.querySelector('#history-tab-details')?.getAttribute('aria-selected')).toBe('true')
+  })
+  it('이력 탭의 방향키 탐색과 목록·필터 변경 시 상세 기록 초기화가 동작한다', async () => {
+    await route('/history')
+    const details = container.querySelector<HTMLButtonElement>('#history-tab-details')!
+    await act(async () => { details.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true })) })
+    expect(document.activeElement?.id).toBe('history-tab-similar')
+    expect(container.querySelector('#history-tab-similar')?.getAttribute('aria-selected')).toBe('true')
+    await act(async () => { document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true })) })
+    expect(document.activeElement?.id).toBe('history-tab-guide')
+    await act(async () => { container.querySelectorAll<HTMLButtonElement>('[aria-label$="기록 상세 보기"]')[1].click() })
+    expect(container.querySelector('[aria-label="점검 상세 정보"] h2')?.textContent).toBe('이송 / 정렬부')
+    expect(container.querySelector('#history-tab-details')?.getAttribute('aria-selected')).toBe('true')
+    await act(async () => { button('조치 참고').click() })
+    await change('[aria-label="이력 진단 지점 필터"]', 'hydraulic')
+    expect(container.querySelector('#history-tab-details')?.getAttribute('aria-selected')).toBe('true')
+    expect(container.querySelector('[aria-label="점검 상세 정보"] h2')?.textContent).toBe('유압 / 프레스')
   })
   it('저장 실패 시 입력을 유지하고 성공으로 표시하지 않는다', async () => {
     await route('/diagnosis/motor'); await act(async () => { button('점검 결과 입력').click() })

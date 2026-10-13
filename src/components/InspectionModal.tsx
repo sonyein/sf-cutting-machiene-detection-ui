@@ -25,7 +25,7 @@ export default function InspectionModal({ points, initialPoint, onClose, onSaved
       try { const record = await inspectionRepository.save(draft, point.hi); onSaved(record) } catch (err) { setSaveError(err instanceof Error ? err.message : '저장하지 못했습니다.') } finally { setSaving(false) }
     }}>
       <div className={styles.body}>
-        <p className={styles.note}>현재 HI는 가상 진단 결과입니다. 입력한 점검 기록은 이 브라우저에 저장됩니다.</p>
+        <p className={styles.note}>저장 시 HI에는 현재 예시 진단값을 기록합니다. 점검 일자의 실측값은 아닙니다. 조치 후 HI는 직접 입력한 참고 값이며 재진단 결과가 아닙니다. 기록은 이 브라우저에 저장됩니다.</p>
         <div className={styles.twoColumns}>
           <label htmlFor="inspection-pointId">진단 지점 <span className={styles.required}>필수</span><select {...fieldProps('pointId')} value={draft.pointId} onChange={(e) => update('pointId', e.target.value as PointId)}>{points.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}</select>{error('pointId')}</label>
           <label htmlFor="inspection-inspectedOn">점검 일자 <span className={styles.required}>필수</span><input {...fieldProps('inspectedOn')} type="date" max={todayKst()} value={draft.inspectedOn} onChange={(e) => update('inspectedOn', e.target.value)} />{error('inspectedOn')}</label>

@@ -6,6 +6,8 @@ import { StatusBadge } from '../components/StatusBadge'
 import { MachineDiagram } from '../components/MachineDiagram'
 import { overviewGuidance } from '../data/overviewGuidance'
 import styles from './OverviewPage.module.css'
+import { TrendRange } from '../components/TrendRange'
+import { COMPACT_OVERVIEW_QUERY, useMediaQuery } from '../hooks/useMediaQuery'
 
 const HealthTrend = lazy(() => import('../components/HealthTrend'))
 
@@ -15,6 +17,7 @@ const periodLabels: Record<TrendPeriod, string> = { '8h': '8시간', '24h': '24�
 
 export default function OverviewPage({ snapshot, selected, records, onSelect, onNavigate, onOpenCriteria, onHistory }: Props) {
   const [period, setPeriod] = useState<TrendPeriod>('24h')
+  const compact = useMediaQuery(COMPACT_OVERVIEW_QUERY)
   const hi = useMemo(() => overallHealth(snapshot.points.map((point) => point.hi)), [snapshot])
   const counts = useMemo(() => countHealthStates(snapshot.points.map((point) => point.hi)), [snapshot])
   const point = snapshot.points.find((item) => item.id === selected)!
@@ -22,6 +25,20 @@ export default function OverviewPage({ snapshot, selected, records, onSelect, on
   const latest = records.find((record) => record.pointId === selected)
   const captureParts = new Intl.DateTimeFormat('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: 'Asia/Seoul' }).formatToParts(new Date(snapshot.capturedAt))
   const capture = Object.fromEntries(captureParts.map((part) => [part.type, part.value]))
+  const pointDetail = <section className={styles.pointDetail} aria-labelledby="selected-point-heading" aria-live="polite">
+    <div className={styles.detailEyebrow}><span>선택 지점</span><span>{point.number.toString().padStart(2, '0')}</span></div>
+    <h3 id="selected-point-heading">{point.name}</h3>
+    <dl className={styles.statusFacts}>
+      <div><dt>현재 상태</dt><dd><StatusBadge hi={point.hi} subtle /><span>{HEALTH_STATES[state].action}</span></dd></div>
+      <div><dt>현재 HI</dt><dd><strong>{point.hi.toFixed(2)}</strong></dd></div>
+    </dl>
+    <dl className={styles.detailFields}>
+      <div className={styles.detailField}><dt>판단 근거</dt><dd>{overviewGuidance[point.id].evidence.map((reason) => <p key={reason}>{reason}</p>)}</dd></div>
+      <div className={styles.detailField}><dt>권장 조치</dt><dd>{overviewGuidance[point.id].action}</dd></div>
+      <div className={`${styles.detailField} ${styles.inspectionField}`}><dt>최근 점검<span>{!latest ? '기록 없음' : latest.source === 'mock' ? '예시 이력' : '사용자 입력'}</span></dt><dd>{latest ? <><time dateTime={latest.inspectedOn}>{latest.inspectedOn.replaceAll('-', '.')}</time><button className={styles.inspectionLink} onClick={() => onHistory(point.id, latest.id)}>{latest.action}</button><span className={styles.inspectionResult}>조치 후 HI · 기록값 {latest.hiAfter === null ? '미입력' : latest.hiAfter.toFixed(2)}</span></> : '등록된 기록이 없습니다.'}</dd></div>
+    </dl>
+    <div className={styles.detailActions}><button className={`button primary ${styles.detailButton}`} onClick={() => onNavigate(selected)}>상세 진단 보기</button></div>
+  </section>
 
   return <>
     <div className={styles.pageHeading}><div><h1>설비 전체 진단</h1><p>설비 상태를 확인하고 점검할 지점을 선택하세요.</p></div><button className="button" onClick={onOpenCriteria}><Icon name="info" size={16} />상태 기준</button></div>
@@ -36,12 +53,13 @@ export default function OverviewPage({ snapshot, selected, records, onSelect, on
       <section className={styles.diagnosticPanel} aria-labelledby="diagram-heading">
         <div className={styles.panelHeading}><h2 id="diagram-heading">설비 진단 위치</h2><div className={styles.legend}>{HEALTH_ORDER.map((status) => <span key={status} className={styles[status]}><i />{HEALTH_STATES[status].label}</span>)}</div></div>
         <MachineDiagram points={snapshot.points} selected={selected} onSelect={onSelect} />
+        {compact && pointDetail}
       </section>
       <section className={styles.trendPanel} aria-labelledby="trend-heading">
         <div className={styles.chartHeading}><div><h2 id="trend-heading">HI 추이</h2><span>0 정상 → 1 이상</span></div><div className={styles.periodSelector} role="group" aria-label="HI 추이 기간">{(Object.keys(periodLabels) as TrendPeriod[]).map((item) => <button key={item} aria-pressed={period === item} onClick={() => setPeriod(item)}>{periodLabels[item]}</button>)}</div></div>
         <div className={styles.chartLegend}>{snapshot.points.map((item) => <button key={item.id} onClick={() => onSelect(item.id)} aria-pressed={item.id === selected}><i style={{ background: pointColors[item.id] }} />{item.shortName}</button>)}<span>점선: 상태 경계</span></div>
         <div className={styles.chartContainer}><Suspense fallback={<div className={styles.chartLoading} role="status">HI 추이를 불러오는 중입니다.</div>}><HealthTrend points={snapshot.points} selected={selected} period={period} /></Suspense></div>
-        <div className={styles.chartFooter}>고정된 예시 데이터 · {periodLabels[period]} 구간 · 기준 시각까지의 추이</div>
+        <div className={styles.chartFooter}>예시 추이 · <TrendRange pointId={selected} period={period} /></div>
       </section>
       </div>
       <section className={styles.pointPanel} aria-labelledby="points-heading">
@@ -55,20 +73,7 @@ export default function OverviewPage({ snapshot, selected, records, onSelect, on
             <StatusBadge hi={item.hi} subtle />
           </button>)}
         </div>
-        <section className={styles.pointDetail} aria-labelledby="selected-point-heading" aria-live="polite">
-          <div className={styles.detailEyebrow}><span>선택 지점</span><span>{point.number.toString().padStart(2, '0')}</span></div>
-          <h3 id="selected-point-heading">{point.name}</h3>
-          <dl className={styles.statusFacts}>
-            <div><dt>현재 상태</dt><dd><StatusBadge hi={point.hi} subtle /><span>{HEALTH_STATES[state].action}</span></dd></div>
-            <div><dt>현재 HI</dt><dd><strong>{point.hi.toFixed(2)}</strong></dd></div>
-          </dl>
-          <dl className={styles.detailFields}>
-            <div className={styles.detailField}><dt>판단 근거</dt><dd>{overviewGuidance[point.id].evidence.map((reason) => <p key={reason}>{reason}</p>)}</dd></div>
-            <div className={styles.detailField}><dt>권장 조치</dt><dd>{overviewGuidance[point.id].action}</dd></div>
-            <div className={`${styles.detailField} ${styles.inspectionField}`}><dt>최근 점검<span>{!latest ? '기록 없음' : latest.source === 'mock' ? '예시 이력' : '사용자 입력'}</span></dt><dd>{latest ? <><time dateTime={latest.inspectedOn}>{latest.inspectedOn.replaceAll('-', '.')}</time><button className={styles.inspectionLink} onClick={() => onHistory(point.id, latest.id)}>{latest.action}</button><span className={styles.inspectionResult}>조치 후 HI {latest.hiAfter === null ? '미입력' : latest.hiAfter.toFixed(2)}</span></> : '등록된 기록이 없습니다.'}</dd></div>
-          </dl>
-          <div className={styles.detailActions}><button className={`button primary ${styles.detailButton}`} onClick={() => onNavigate(selected)}>상세 진단 보기</button></div>
-        </section>
+        {!compact && pointDetail}
       </section>
     </div>
     <footer className={styles.pageFooter}><span>HI와 판단 근거는 가상 데이터 기준이며, 실제 진단 알고리즘은 연동되지 않았습니다.</span><span>설비 진단 프로토타입 · v0.1</span></footer>

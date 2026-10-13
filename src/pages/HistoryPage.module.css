@@ -11,21 +11,30 @@
 .listHeading { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
 .listHeading h2 { margin: 0; font-size: 15px; }
 .listHeading h2 span { margin-left: 6px; font-size: 12px; color: var(--secondary); font-weight: 400; }
-.listHeading > span { font-size: 11px; color: var(--secondary); }
+.listHeading > span { font-size: 12px; color: var(--secondary); }
 .table { min-width: 580px; }
+.mobileSource { display: none; }
+.causeButton { display: -webkit-box; width: 100%; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; }
+.dateColumn { width: 88px; }
+.pointColumn { width: 80px; }
+.outcomeColumn { width: 88px; }
+.sourceColumn { width: 90px; }
 .table td { vertical-align: middle; }
 .table td:nth-child(3) { width: 42%; }
 .table button { font: inherit; padding: 0; border: 0; background: transparent; text-align: left; color: var(--text); line-height: 1.6; }
 .table button:hover { color: var(--blue-700); text-decoration: underline; }
-.date, .source { font-size: 11px; white-space: nowrap; color: var(--secondary); }
+.date { font-size: 13px; white-space: nowrap; color: var(--secondary); }
+.source { font-size: 12px; white-space: nowrap; color: var(--secondary); }
 .selectedRow { background: color-mix(in srgb, var(--blue-tint) 55%, white); }
 .empty { padding: 40px 24px !important; text-align: center; color: var(--secondary); font-size: 13px; }
-.pagination { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 24px; font-size: 11px; color: var(--secondary); }
+.pagination { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 24px; font-size: 12px; color: var(--secondary); }
 .pagination > div { display: flex; align-items: center; gap: 12px; }
-.pagination button { min-height: 30px; font-size: 11px; padding: 4px 8px; }
+.pagination button { min-height: 30px; font-size: 12px; padding: 4px 8px; }
 .detailPanel { padding: 24px; }
+.detailPanel:focus { outline: none; }
+.returnButton { margin-bottom: 16px; color: var(--blue-700); }
 .detailHeading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-.detailHeading > div > span { font-size: 11px; color: var(--secondary); }
+.detailHeading > div > span { font-size: 12px; color: var(--secondary); }
 .detailHeading h2 { font-size: 17px; margin: 8px 0 0; }
 .fields { margin: 24px 0; }
 .fields > div { display: grid; grid-template-columns: 68px minmax(0,1fr); gap: 12px; }
@@ -34,23 +43,52 @@
 .fields dd { margin: 0; font-size: 13px; line-height: 1.7; color: var(--gray-700); white-space: pre-wrap; overflow-wrap: anywhere; }
 .hiComparison { display: flex; justify-content: space-between; align-items: center; gap: 16px; border-top: 1px solid var(--border); padding-top: 16px; }
 .hiComparison > div { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
-.hiComparison > div > span:first-child { font-size: 11px; color: var(--secondary); }
+.hiComparison > div > span:first-child { font-size: 12px; color: var(--secondary); }
 .hiComparison strong { font-size: 23px; font-weight: 600; font-variant-numeric: tabular-nums; }
 .hiComparison > span { color: var(--secondary); }
-.diagnosisButton { width: 100%; margin-top: 20px; height: 40px; border-radius: 8px; }
-.referenceSection { border-top: 1px solid var(--border); padding-top: 20px; margin-top: 24px; }
-.referenceSection h3 { margin: 0; font-size: 14px; font-weight: 600; }
-.explanation { color: var(--secondary); font-size: 11px; line-height: 1.7; margin: 6px 0 12px; }
+.hiNote { font-size: 12px; color: var(--secondary); line-height: 1.6; margin: 12px 0 20px; }
+.detailTabs { display: flex; gap: 20px; border-bottom: 1px solid var(--border); }
+.detailTabs button { border: 0; border-bottom: 2px solid transparent; background: transparent; padding: 12px 0; font-size: 13px; color: var(--secondary); white-space: nowrap; }
+.detailTabs button[aria-selected="true"] { color: var(--blue-700); border-bottom-color: var(--blue); font-weight: 600; }
+.tabContent { padding-top: 20px; overflow-wrap: anywhere; }
+.tabContent:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+.tabContent .fields { margin: 0; }
+.tabContent h3 { margin: 0; font-size: 14px; font-weight: 600; }
+.detailAction { border-top: 1px solid var(--border); margin-top: 20px; padding-top: 16px; }
+.detailAction > span { display: block; font-size: 12px; color: var(--secondary); }
+.diagnosisButton { width: 100%; margin-top: 12px; height: 40px; border-radius: 8px; }
+.explanation { color: var(--secondary); font-size: 12px; line-height: 1.7; margin: 6px 0 12px; }
 .relatedRecord { display: flex; flex-direction: column; gap: 4px; text-align: left; padding: 12px 0; width: 100%; border: 0; border-bottom: 1px solid #f2f4f6; background: transparent; }
-.relatedRecord > span { font-size: 11px; color: var(--secondary); }
+.relatedRecord > span { font-size: 12px; color: var(--secondary); }
 .relatedRecord > span:first-child { display: flex; align-items: center; justify-content: space-between; }
 .relatedRecord strong { font-size: 13px; font-weight: 500; }
 .relatedRecord:hover strong { color: var(--blue-700); }
 .guideItem + .guideItem { margin-top: 16px; }
 .guideItem > strong { display: block; font-size: 13px; font-weight: 500; }
-.guideItem > span { display: block; font-size: 11px; color: var(--secondary); margin: 4px 0; }
+.guideItem > span { display: block; font-size: 12px; color: var(--secondary); margin: 4px 0; }
 .guideItem p { font-size: 12px; line-height: 1.7; color: var(--gray-700); margin: 0; }
 .guideItem button { color: var(--blue-700); margin-top: 4px; }
 @media(max-width:1250px) { .workspace { grid-template-columns: minmax(0,1fr) 340px; gap: 16px; } .filters { padding: 16px 20px; } .detailPanel { padding: 20px; } }
 @media(max-width:1050px) { .workspace { grid-template-columns: minmax(0,1fr); } }
 @media(max-width:600px) { .heading { align-items: flex-start; gap: 12px; } .heading h1 { font-size: 21px; } .heading p { font-size: 12px; } .heading > button { font-size: 12px; padding: 6px 10px; } .filters { padding: 16px; } .filters label:first-child { flex-basis: 100%; } .detailPanel { padding: 16px; } .pagination { padding: 16px; } }
+@media(max-width:600px) {
+  .heading { flex-wrap: wrap; gap: 8px 12px; }
+  .heading > div { flex: 1 1 220px; min-width: 0; }
+  .filters label { min-width: 130px; max-width: 100%; }
+  .table { min-width: 0; table-layout: fixed; }
+  .table th, .table td { padding: 8px 6px; }
+  .table th { font-size: 12px; white-space: normal; }
+  .table td:nth-child(3) { width: auto; }
+  .table td:nth-child(4) { padding-left: 4px; padding-right: 4px; }
+  .dateColumn { width: 60px; }
+  .pointColumn { width: 52px; }
+  .outcomeColumn { width: 76px; }
+  .sourceColumn { display: none; }
+  .date time > span { display: block; }
+  .date time > span:first-child { font-size: 12px; }
+  .mobileSource { display: block; margin-top: 4px; font-size: 12px; color: var(--secondary); }
+  .detailTabs { gap: 16px; }
+  .detailHeading > div { min-width: 0; }
+  .detailHeading h2, .relatedRecord, .guideItem { overflow-wrap: anywhere; }
+  .pagination { flex-wrap: wrap; gap: 8px 16px; }
+}

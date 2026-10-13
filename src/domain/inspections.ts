@@ -39,11 +39,15 @@ export interface InspectionFilter { pointId: PointId | ''; start: string; end: s
 export function filterInspections(records: readonly InspectionRecord[], filter: InspectionFilter): InspectionRecord[] {
   return sortInspections(records.filter((record) => (!filter.pointId || record.pointId === filter.pointId) && (!filter.start || record.inspectedOn >= filter.start) && (!filter.end || record.inspectedOn <= filter.end)))
 }
-const keywords = ['마모', '커팅날', '진동', '베어링', '윤활', '압력', '누유', '유압', '오일', '정렬', '이송', '위치']
+// Match symptoms/causes, rather than the names of the diagnostic points themselves.
+const keywords = ['마모', '손상', '진동', '윤활', '압력', '누유', '정렬', '편차', '과열', '과전류', '소음', '체결']
+export function sharedCauseKeywords(record: InspectionRecord, other: InspectionRecord): string[] {
+  return keywords.filter((word) => record.cause.includes(word) && other.cause.includes(word))
+}
 export function findSimilarRecords(record: InspectionRecord, records: readonly InspectionRecord[], limit = 3): InspectionRecord[] {
-  const terms = keywords.filter((word) => record.cause.includes(word))
   return sortInspections(records.filter((item) => item.id !== record.id && item.pointId === record.pointId))
-    .map((item) => ({ item, score: terms.filter((word) => item.cause.includes(word)).length }))
+    .map((item) => ({ item, score: sharedCauseKeywords(record, item).length }))
+    .filter(({ score }) => score > 0)
     .sort((a, b) => b.score - a.score).slice(0, limit).map(({ item }) => item)
 }
 export function buildActionGuide(pointId: PointId, records: readonly InspectionRecord[]) {

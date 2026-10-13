@@ -29,6 +29,14 @@ describe('점검 기록 검증과 조회', () => {
     const guide = buildActionGuide('blade', mockInspections)
     expect(guide).toHaveLength(1); expect(guide[0].count).toBe(3); expect(guide[0].action).toBe('커팅날 교체')
   })
+  it('지점명만 같거나 공통 원인·징후가 없는 기록은 유사 사례에서 제외한다', () => {
+    const base = mockInspections[0]
+    const unrelated = { ...base, id: 'unrelated', cause: '커팅날 체결 느슨함' }
+    const nameOnly = { ...base, id: 'name-only', cause: '커팅날 확인' }
+    const otherPoint = { ...base, id: 'other-point', pointId: 'motor' as const }
+    expect(findSimilarRecords(base, [base, unrelated, nameOnly, otherPoint])).toEqual([])
+    expect(findSimilarRecords(nameOnly, [base, nameOnly])).toEqual([])
+  })
 })
 describe('localStorage 교체 가능한 점검 저장소', () => {
   it('저장 후 새 저장소를 만들어도 입력값과 예시 이력이 유지된다', async () => {

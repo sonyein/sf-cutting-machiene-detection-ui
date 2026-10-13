@@ -1,11 +1,11 @@
-﻿.pageHeading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; gap: 16px; }
+.pageHeading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; gap: 16px; }
 .pageHeading p { margin: 0; color: var(--secondary); font-size: 13px; }
 .sampleNotice { display: flex; align-items: center; gap: 10px; color: var(--secondary); font-size: 12px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; background: #f2f4f6; margin-bottom: 16px; }
-.sampleBadge { color: var(--gray-700); font-size: 11px; font-weight: 600; white-space: nowrap; }
-.captureTime { margin-left: auto; white-space: nowrap; color: var(--muted); font-size: 11px; }
+.sampleBadge { color: var(--gray-700); font-size: 12px; font-weight: 600; white-space: nowrap; }
+.captureTime { margin-left: auto; white-space: nowrap; color: var(--muted); font-size: 12px; }
 .summary { display: flex; align-items: center; padding: 16px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 24px; }
 .equipmentIdentity { display: flex; flex-direction: column; gap: 3px; padding-right: 32px; flex: 1; }
-.equipmentId { color: var(--muted); font-size: 10px; letter-spacing: .6px; font-weight: 500; }
+.equipmentId { color: var(--muted); font-size: 12px; letter-spacing: .6px; font-weight: 500; }
 .equipmentIdentity > strong { font-size: 17px; font-weight: 600; }
 .equipmentIdentity > span:last-child { font-size: 12px; color: var(--secondary); }
 .overall { border-left: 1px solid var(--border); padding: 0 32px; flex: 1.2; }
@@ -13,12 +13,12 @@
 .metricLabel button { padding: 0; }
 .overallValue { display: flex; gap: 10px; align-items: center; }
 .overallValue strong { font-size: 28px; line-height: 1.3; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.5px; }
-.overallHint { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; }
+.overallHint { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
 .stateCounts { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; border-left: 1px solid var(--border); padding-left: 32px; }
 .stateCounts > div { min-width: 52px; }
-.stateCounts > div > span { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--secondary); }
+.stateCounts > div > span { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--secondary); }
 .stateCounts strong { display: block; font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; margin-top: 3px; }
-.stateCounts small { margin-left: 5px; font-size: 11px; font-weight: 400; color: var(--muted); }
+.stateCounts small { margin-left: 5px; font-size: 12px; font-weight: 400; color: var(--muted); }
 .normal { --state-color: var(--green); }
 .watch { --state-color: var(--yellow); }
 .warning { --state-color: var(--orange); }
@@ -30,11 +30,11 @@
 .diagnosticPanel, .pointPanel { overflow: hidden; }
 .panelHeading { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; min-height: 56px; border-bottom: 1px solid var(--border); gap: 16px; }
 .panelHeading h2 { margin: 0; font-size: 15px; }
-.pointCount { font-size: 11px; color: var(--muted); }
-.legend { display: flex; gap: 16px; font-size: 11px; color: var(--secondary); }
+.pointCount { font-size: 12px; color: var(--muted); }
+.legend { display: flex; gap: 16px; font-size: 12px; color: var(--secondary); }
 .legend span { display: flex; align-items: center; gap: 5px; }
 .listHeader, .pointRow { display: grid; grid-template-columns: 20px minmax(0,1fr) 40px 40px; column-gap: 12px; align-items: center; padding-left: 22px; padding-right: 22px; }
-.listHeader { min-height: 32px; color: var(--muted); font-size: 10px; border-bottom: 1px solid #f2f4f6; }
+.listHeader { min-height: 32px; color: var(--muted); font-size: 12px; border-bottom: 1px solid #f2f4f6; }
 .listHeader > span:nth-child(3) { text-align: right; }
 .listHeader > span:last-child { text-align: center; }
 .pointRow { width: 100%; margin: 0; border: 0; border-left: 2px solid transparent; border-radius: 0; padding-top: 12px; padding-bottom: 12px; padding-left: 20px; min-height: 64px; text-align: left; background: transparent; position: relative; }
@@ -42,7 +42,7 @@
 .pointRow:hover { background: var(--background); }
 .pointSelected, .pointSelected:hover { background: color-mix(in srgb, var(--blue-tint) 55%, white); border-left-color: var(--blue); }
 .pointRow:focus-visible { outline-offset: -3px; }
-.pointNumber { align-self: start; padding-top: 2px; color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.pointNumber { align-self: start; padding-top: 2px; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
 .pointSelected .pointNumber { color: var(--blue-700); }
 .pointText { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .pointText > strong { font-size: 14px; line-height: 20px; font-weight: 500; white-space: nowrap; }
@@ -50,7 +50,7 @@
 .pointHi { text-align: right; font-size: 15px; font-weight: 500; font-variant-numeric: tabular-nums; }
 .pointRow > span:last-child { justify-self: end; }
 .pointDetail { padding: 24px; border-top: 1px solid var(--border); }
-.detailEyebrow { display: flex; justify-content: space-between; color: var(--secondary); font-size: 11px; line-height: 16px; }
+.detailEyebrow { display: flex; justify-content: space-between; color: var(--secondary); font-size: 12px; line-height: 16px; }
 .detailEyebrow > span:last-child { color: var(--muted); font-variant-numeric: tabular-nums; }
 .pointDetail h3 { font-size: 17px; line-height: 24px; letter-spacing: -.25px; font-weight: 600; margin: 8px 0 20px; }
 .statusFacts { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 0; padding-bottom: 20px; }
@@ -65,10 +65,10 @@
 .detailField dd { margin: 0; color: var(--gray-700); font-size: 13px; line-height: 21px; word-break: keep-all; overflow-wrap: anywhere; }
 .detailField dd p { margin: 0; }
 .detailField dd p + p { margin-top: 6px; }
-.inspectionField dt > span { display: block; font-size: 10px; color: var(--muted); line-height: 18px; }
-.inspectionField time { font-size: 11px; color: var(--secondary); font-variant-numeric: tabular-nums; }
+.inspectionField dt > span { display: block; font-size: 12px; color: var(--muted); line-height: 18px; }
+.inspectionField time { font-size: 12px; color: var(--secondary); font-variant-numeric: tabular-nums; }
 .inspectionField .inspectionAction { margin: 2px 0; color: var(--text); font-size: 13px; font-weight: 500; }
-.inspectionResult { font-size: 11px; color: var(--secondary); font-variant-numeric: tabular-nums; }
+.inspectionResult { font-size: 12px; color: var(--secondary); font-variant-numeric: tabular-nums; }
 .inspectionLink { display: block; padding: 0; border: 0; background: transparent; color: var(--blue-700); font-size: 13px; font-weight: 500; text-align: left; line-height: 21px; margin: 2px 0; }
 .inspectionLink:hover { text-decoration: underline; }
 .detailActions { padding-top: 20px; margin-top: 20px; border-top: 1px solid var(--border); }
@@ -77,19 +77,19 @@
 .chartHeading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .chartHeading > div:first-child { display: flex; align-items: center; gap: 12px; }
 .chartHeading h2 { margin: 0; font-size: 15px; }
-.chartHeading span { font-size: 11px; color: var(--muted); }
+.chartHeading span { font-size: 12px; color: var(--muted); }
 .periodSelector { display: flex; gap: 2px; padding: 2px; border-radius: 5px; background: #f2f4f6; }
-.periodSelector button { border: 0; background: transparent; border-radius: 3px; padding: 5px 10px; font-size: 11px; color: var(--secondary); white-space: nowrap; }
+.periodSelector button { border: 0; background: transparent; border-radius: 3px; padding: 5px 10px; font-size: 12px; color: var(--secondary); white-space: nowrap; }
 .periodSelector button[aria-pressed="true"] { color: var(--text); background: white; box-shadow: 0 0 0 1px var(--border); font-weight: 500; }
-.chartLegend { display: flex; align-items: center; gap: 16px; margin: 16px 0 8px; }
-.chartLegend button { padding: 0; display: flex; align-items: center; gap: 6px; border: 0; background: transparent; font-size: 11px; color: var(--secondary); }
+.chartLegend { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; margin: 16px 0 8px; }
+.chartLegend button { padding: 0; display: flex; align-items: center; gap: 6px; border: 0; background: transparent; font-size: 12px; color: var(--secondary); }
 .chartLegend button[aria-pressed="true"] { color: var(--text); font-weight: 600; }
 .chartLegend i { width: 12px; height: 2px; }
-.chartLegend > span { margin-left: auto; color: var(--muted); font-size: 10px; }
+.chartLegend > span { margin-left: auto; color: var(--muted); font-size: 12px; }
 .chartContainer { height: 184px; }
 .chartLoading { height: 100%; display: grid; place-items: center; font-size: 12px; color: var(--muted); }
-.chartFooter { font-size: 10px; color: var(--muted); padding: 10px 0 0 30px; }
-.pageFooter { display: flex; justify-content: space-between; gap: 12px; margin-top: 16px; font-size: 10px; color: var(--muted); }
+.chartFooter { font-size: 12px; color: var(--muted); padding: 10px 0 0 30px; }
+.pageFooter { display: flex; justify-content: space-between; gap: 12px; margin-top: 16px; font-size: 12px; color: var(--muted); }
 @media (min-width: 1700px) { .workspace { grid-template-columns: minmax(0,1fr) 400px; } }
 @media (max-width: 1250px) {
   .summary { padding: 16px 20px; }
@@ -132,26 +132,37 @@
   .pageHeading { margin-bottom: 16px; }
   .pageHeading h1 { font-size: 21px; }
   .pageHeading p { font-size: 12px; }
-  .pageHeading > button { font-size: 11px; padding: 6px 8px; white-space: nowrap; }
-  .sampleNotice { align-items: flex-start; font-size: 11px; }
+  .pageHeading > button { font-size: 12px; padding: 6px 8px; white-space: nowrap; }
+  .sampleNotice { align-items: flex-start; font-size: 12px; }
   .sampleBadge { padding-top: 1px; }
   .summary { margin-bottom: 16px; }
   .panelHeading { padding: 14px 16px; min-height: 52px; }
   .panelHeading h2 { font-size: 14px; }
-  .legend { gap: 8px; font-size: 10px; }
+  .legend { gap: 8px; font-size: 12px; }
   .pointDetail { padding: 20px 16px; }
   .listHeader, .pointRow { grid-template-columns: 20px minmax(0,1fr) 36px 36px; column-gap: 10px; padding-right: 16px; }
   .listHeader { padding-left: 18px; }
   .pointRow { padding-left: 16px; }
   .pointRow + .pointRow::before { left: 18px; right: 16px; }
   .pointText > strong { font-size: 13px; }
-  .pointText > span { font-size: 11px; overflow: hidden; }
+  .pointText > span { font-size: 12px; overflow: hidden; }
   .pointHi { font-size: 14px; }
   .trendPanel { padding: 16px; }
   .chartHeading > div:first-child { gap: 8px; }
-  .chartHeading span { font-size: 10px; }
+  .chartHeading span { font-size: 12px; }
   .periodSelector button { padding: 5px 8px; }
   .chartLegend { gap: 16px; }
   .chartContainer { height: 168px; }
-  .chartFooter { font-size: 9px; }
+  .chartFooter { font-size: 12px; }
+}
+@media (max-width: 600px) {
+  .pageHeading { flex-wrap: wrap; align-items: flex-start; gap: 8px 16px; }
+  .pageHeading > div { flex: 1 1 200px; min-width: 0; }
+  .panelHeading { flex-wrap: wrap; gap: 8px; }
+  .chartHeading { flex-wrap: wrap; gap: 8px; }
+  .chartHeading > div:first-child { flex-wrap: wrap; }
+  .chartFooter { padding-left: 0; overflow-wrap: anywhere; }
+  .listHeader, .pointRow { grid-template-columns: 20px minmax(0,1fr) 36px 40px; }
+  .pointText > strong { white-space: normal; overflow-wrap: anywhere; }
+  .statusFacts dd { flex-wrap: wrap; }
 }
