@@ -1,0 +1,20 @@
+.container { min-width: 0; display: flex; flex-direction: column; justify-content: center; padding: 4px 8px 0; }
+.diagram { position: relative; width: 100%; aspect-ratio: 840 / 400; }
+.diagram img { display: block; width: 100%; height: auto; user-select: none; }
+.annotation { position: absolute; transform: translateY(-80%); color: var(--secondary); font-size: 11px; pointer-events: none; white-space: nowrap; }
+.anchor { position: absolute; transform: translate(-50%, -50%); --status-color: var(--green); }
+.normal { --status-color: var(--green-900); }
+.watch { --status-color: var(--yellow-900); }
+.warning { --status-color: var(--orange-900); }
+.danger { --status-color: var(--red); }
+.pin { display: grid; place-items: center; width: 28px; height: 28px; border: 2px solid white; border-radius: 50%; background: var(--status-color); color: white; font-size: 12px; font-weight: 700; padding: 0; box-shadow: 0 0 0 1px var(--status-color); }
+.selected .pin { outline: 2px solid var(--blue); outline-offset: 3px; }
+.pin:hover { filter: brightness(.92); }
+.pin:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+.tooltip { position: absolute; bottom: 39px; left: 50%; transform: translateX(-50%); background: var(--surface); border: 1px solid var(--border); border-radius: 6px; box-shadow: 0 3px 10px rgba(25,31,40,.08); padding: 10px 12px; width: 215px; z-index: 3; font-size: 12px; pointer-events: none; }
+.tooltip strong { font-size: 13px; font-weight: 600; }
+.tooltip > div { margin-top: 5px; display: flex; justify-content: space-between; gap: 8px; }
+.tooltip b { font-variant-numeric: tabular-nums; font-weight: 600; }
+.tooltipStatus { color: var(--status-color); font-size: 11px; }
+.caption { display: flex; justify-content: space-between; gap: 16px; margin: 0 12px; padding: 8px 0 12px; color: var(--secondary); font-size: 11px; border-top: 1px solid #f2f4f6; }
+@media (max-width: 600px) { .container { padding: 8px 0 0; } .annotation { font-size: 10px; } .caption { flex-direction: column; gap: 4px; margin: 0 16px; } .pin { width: 25px; height: 25px; font-size: 11px; } }

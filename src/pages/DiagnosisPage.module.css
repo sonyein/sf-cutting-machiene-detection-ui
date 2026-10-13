@@ -1,0 +1,51 @@
+.backRow { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.backRow label { display: flex; align-items: center; gap: 8px; color: var(--secondary); font-size: 12px; }
+.backRow select { max-width: 200px; padding: 6px 8px; min-height: 32px; }
+.heading { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-bottom: 20px; }
+.heading p { margin: 0; color: var(--secondary); font-size: 13px; }
+.headingActions { display: flex; align-items: center; gap: 24px; }
+.headingActions > button { height: 42px; border-radius: 8px; white-space: nowrap; }
+.currentHi { display: flex; align-items: center; gap: 8px; }
+.currentHi > span:first-child { font-size: 12px; color: var(--secondary); white-space: nowrap; }
+.currentHi strong { font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.analysisWorkspace { display: grid; grid-template-columns: minmax(0,1fr) 384px; gap: 24px; align-items: stretch; margin: 24px 0; }
+.signalPanel, .context, .featuresAndTrend { border: 1px solid var(--border); background: white; border-radius: 8px; min-width: 0; overflow: hidden; }
+.panelHeading { padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; border-bottom: 1px solid var(--border); }
+.panelHeading h2 { margin: 0; font-size: 15px; }
+.panelHeading > span { color: var(--secondary); font-size: 11px; white-space: nowrap; }
+.sensorTabs { display: flex; gap: 24px; padding: 0 24px; border-bottom: 1px solid var(--border); }
+.sensorTabs button { padding: 12px 0; font-size: 13px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--secondary); }
+.sensorTabs button[aria-selected="true"] { color: var(--blue-700); border-bottom-color: var(--blue); font-weight: 600; }
+.signalToolbar { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px 8px; gap: 12px; }
+.signalToolbar > span { color: var(--secondary); font-size: 11px; }
+.signalChart { height: 268px; margin: 8px 20px 16px; }
+.playback { padding: 16px 24px; border-top: 1px solid var(--border); }
+.playbackButtons { display: flex; align-items: center; gap: 16px; }
+.playbackButtons > button:first-child { min-width: 80px; }
+.playbackButtons label { display: flex; align-items: center; gap: 8px; color: var(--secondary); font-size: 11px; }
+.playbackButtons select { padding: 4px 8px; min-height: 30px; font-size: 12px; }
+.playbackButtons output { margin-left: auto; font-size: 12px; color: var(--secondary); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.playback > input { display: block; width: 100%; margin: 16px 0 8px; accent-color: var(--blue); padding: 0; min-height: 16px; }
+.playbackCaption { font-size: 11px; color: var(--secondary); }
+.context { padding: 20px 24px; }
+.contextHeading { display: flex; justify-content: space-between; align-items: center; }
+.contextHeading h2 { margin: 0; font-size: 15px; }
+.contextFields { margin: 24px 0; }
+.contextFields > div + div { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+.contextFields dt { font-size: 12px; color: var(--secondary); margin-bottom: 8px; }
+.contextFields dd { margin: 0; font-size: 13px; color: var(--gray-700); line-height: 1.7; }
+.contextFields p { margin: 0; }
+.contextFields p + p { margin-top: 4px; }
+.recordLink { display: block; border: 0; background: transparent; color: var(--blue-700); padding: 0; margin-bottom: 8px; text-align: left; font-size: 13px; line-height: 1.6; }
+.recordLink:hover { text-decoration: underline; }
+.contextFields .historyResult { margin-top: 6px; }
+.source { display: block; font-size: 11px; color: var(--secondary); margin-top: 4px; }
+.context > button { width: 100%; height: 40px; border-radius: 8px; }
+.featuresAndTrend { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); }
+.features, .trend { min-width: 0; }
+.trend { border-left: 1px solid var(--border); }
+.hiChart { height: 210px; padding: 16px 20px 0; }
+.calculationNote { font-size: 11px; color: var(--secondary); padding: 12px 24px 16px; margin: 0; line-height: 1.7; }
+@media(max-width:1250px) { .analysisWorkspace { grid-template-columns: minmax(0,1fr) 320px; gap: 16px; } .signalToolbar { flex-wrap: wrap; } .playbackButtons { gap: 12px; flex-wrap: wrap; } .featuresAndTrend { grid-template-columns: 1fr; } .trend { border-left: 0; border-top: 1px solid var(--border); } .headingActions { gap: 16px; } }
+@media(max-width:1050px) { .heading { align-items: flex-start; } .headingActions { flex-direction: column; align-items: flex-end; gap: 8px; } .analysisWorkspace { grid-template-columns: minmax(0,1fr); } .contextFields { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; } .contextFields > div + div { margin: 0; padding: 0; border: 0; } .contextFields > div:last-child { grid-column: 1 / -1; } }
+@media(max-width:600px) { .heading { flex-direction: column; gap: 16px; } .heading h1 { font-size: 21px; } .headingActions { width: 100%; flex-direction: row; align-items: center; justify-content: space-between; } .backRow label { font-size: 0; } .backRow select { font-size: 11px; max-width: 148px; } .panelHeading, .context { padding: 16px; } .sensorTabs { padding: 0 16px; gap: 20px; } .signalToolbar, .playback { padding: 12px 16px; } .signalChart { margin: 8px; height: 230px; } .playbackButtons { gap: 8px; } .playbackButtons label { font-size: 0; } .contextFields { grid-template-columns: 1fr; } .calculationNote { padding: 12px 16px; } }

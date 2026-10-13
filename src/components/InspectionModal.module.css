@@ -1,0 +1,10 @@
+.body { padding: 20px 24px; display: grid; gap: 16px; }
+.note { margin: 0; font-size: 12px; color: var(--secondary); line-height: 1.7; }
+.body label { font-size: 13px; font-weight: 500; }
+.body input, .body select, .body textarea { display: block; width: 100%; margin-top: 6px; }
+.twoColumns { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.required, .optional { margin-left: 5px; color: var(--secondary); font-size: 10px; font-weight: 400; }
+.error { display: block; margin-top: 4px; color: var(--red-700); font-size: 12px; font-weight: 400; }
+.footer { display: flex; justify-content: flex-end; gap: 8px; padding: 16px 24px; border-top: 1px solid var(--border); background: white; position: sticky; bottom: 0; }
+.footer button { height: 42px; border-radius: 8px; min-width: 88px; }
+@media(max-width: 600px) { .twoColumns { grid-template-columns: 1fr; } .body { padding: 16px; } .footer { padding: 16px; } }

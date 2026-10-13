@@ -1,0 +1,157 @@
+﻿.pageHeading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; gap: 16px; }
+.pageHeading p { margin: 0; color: var(--secondary); font-size: 13px; }
+.sampleNotice { display: flex; align-items: center; gap: 10px; color: var(--secondary); font-size: 12px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; background: #f2f4f6; margin-bottom: 16px; }
+.sampleBadge { color: var(--gray-700); font-size: 11px; font-weight: 600; white-space: nowrap; }
+.captureTime { margin-left: auto; white-space: nowrap; color: var(--muted); font-size: 11px; }
+.summary { display: flex; align-items: center; padding: 16px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 24px; }
+.equipmentIdentity { display: flex; flex-direction: column; gap: 3px; padding-right: 32px; flex: 1; }
+.equipmentId { color: var(--muted); font-size: 10px; letter-spacing: .6px; font-weight: 500; }
+.equipmentIdentity > strong { font-size: 17px; font-weight: 600; }
+.equipmentIdentity > span:last-child { font-size: 12px; color: var(--secondary); }
+.overall { border-left: 1px solid var(--border); padding: 0 32px; flex: 1.2; }
+.metricLabel { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--secondary); margin-bottom: 2px; }
+.metricLabel button { padding: 0; }
+.overallValue { display: flex; gap: 10px; align-items: center; }
+.overallValue strong { font-size: 28px; line-height: 1.3; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.5px; }
+.overallHint { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; }
+.stateCounts { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; border-left: 1px solid var(--border); padding-left: 32px; }
+.stateCounts > div { min-width: 52px; }
+.stateCounts > div > span { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--secondary); }
+.stateCounts strong { display: block; font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; margin-top: 3px; }
+.stateCounts small { margin-left: 5px; font-size: 11px; font-weight: 400; color: var(--muted); }
+.normal { --state-color: var(--green); }
+.watch { --state-color: var(--yellow); }
+.warning { --state-color: var(--orange); }
+.danger { --state-color: var(--red); }
+.stateCounts i, .legend i { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--state-color); }
+.workspace { display: grid; grid-template-columns: minmax(0,1fr) 384px; align-items: start; gap: 24px; }
+.visualColumn { display: grid; align-content: start; gap: 24px; min-width: 0; }
+.diagnosticPanel, .pointPanel, .trendPanel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); min-width: 0; }
+.diagnosticPanel, .pointPanel { overflow: hidden; }
+.panelHeading { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; min-height: 56px; border-bottom: 1px solid var(--border); gap: 16px; }
+.panelHeading h2 { margin: 0; font-size: 15px; }
+.pointCount { font-size: 11px; color: var(--muted); }
+.legend { display: flex; gap: 16px; font-size: 11px; color: var(--secondary); }
+.legend span { display: flex; align-items: center; gap: 5px; }
+.listHeader, .pointRow { display: grid; grid-template-columns: 20px minmax(0,1fr) 40px 40px; column-gap: 12px; align-items: center; padding-left: 22px; padding-right: 22px; }
+.listHeader { min-height: 32px; color: var(--muted); font-size: 10px; border-bottom: 1px solid #f2f4f6; }
+.listHeader > span:nth-child(3) { text-align: right; }
+.listHeader > span:last-child { text-align: center; }
+.pointRow { width: 100%; margin: 0; border: 0; border-left: 2px solid transparent; border-radius: 0; padding-top: 12px; padding-bottom: 12px; padding-left: 20px; min-height: 64px; text-align: left; background: transparent; position: relative; }
+.pointRow + .pointRow::before { content: ''; position: absolute; height: 1px; top: 0; left: 22px; right: 22px; background: #f2f4f6; }
+.pointRow:hover { background: var(--background); }
+.pointSelected, .pointSelected:hover { background: color-mix(in srgb, var(--blue-tint) 55%, white); border-left-color: var(--blue); }
+.pointRow:focus-visible { outline-offset: -3px; }
+.pointNumber { align-self: start; padding-top: 2px; color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.pointSelected .pointNumber { color: var(--blue-700); }
+.pointText { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pointText > strong { font-size: 14px; line-height: 20px; font-weight: 500; white-space: nowrap; }
+.pointText > span { font-size: 12px; line-height: 18px; color: var(--secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pointHi { text-align: right; font-size: 15px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.pointRow > span:last-child { justify-self: end; }
+.pointDetail { padding: 24px; border-top: 1px solid var(--border); }
+.detailEyebrow { display: flex; justify-content: space-between; color: var(--secondary); font-size: 11px; line-height: 16px; }
+.detailEyebrow > span:last-child { color: var(--muted); font-variant-numeric: tabular-nums; }
+.pointDetail h3 { font-size: 17px; line-height: 24px; letter-spacing: -.25px; font-weight: 600; margin: 8px 0 20px; }
+.statusFacts { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 0; padding-bottom: 20px; }
+.statusFacts dt { font-size: 12px; color: var(--secondary); margin-bottom: 6px; }
+.statusFacts dd { display: flex; align-items: center; gap: 8px; min-height: 28px; margin: 0; }
+.statusFacts dd > span:last-child:not(:first-child) { font-size: 12px; color: var(--secondary); }
+.statusFacts strong { font-size: 23px; line-height: 28px; letter-spacing: -.3px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.detailFields { margin: 0; padding-top: 20px; border-top: 1px solid var(--border); }
+.detailField { display: grid; grid-template-columns: 64px minmax(0,1fr); column-gap: 16px; align-items: baseline; }
+.detailField + .detailField { margin-top: 20px; }
+.detailField dt { color: var(--secondary); font-size: 12px; line-height: 21px; }
+.detailField dd { margin: 0; color: var(--gray-700); font-size: 13px; line-height: 21px; word-break: keep-all; overflow-wrap: anywhere; }
+.detailField dd p { margin: 0; }
+.detailField dd p + p { margin-top: 6px; }
+.inspectionField dt > span { display: block; font-size: 10px; color: var(--muted); line-height: 18px; }
+.inspectionField time { font-size: 11px; color: var(--secondary); font-variant-numeric: tabular-nums; }
+.inspectionField .inspectionAction { margin: 2px 0; color: var(--text); font-size: 13px; font-weight: 500; }
+.inspectionResult { font-size: 11px; color: var(--secondary); font-variant-numeric: tabular-nums; }
+.inspectionLink { display: block; padding: 0; border: 0; background: transparent; color: var(--blue-700); font-size: 13px; font-weight: 500; text-align: left; line-height: 21px; margin: 2px 0; }
+.inspectionLink:hover { text-decoration: underline; }
+.detailActions { padding-top: 20px; margin-top: 20px; border-top: 1px solid var(--border); }
+.detailButton { width: 100%; height: 42px; border-radius: 8px; font-size: 14px; font-weight: 600; }
+.trendPanel { padding: 20px 24px; }
+.chartHeading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.chartHeading > div:first-child { display: flex; align-items: center; gap: 12px; }
+.chartHeading h2 { margin: 0; font-size: 15px; }
+.chartHeading span { font-size: 11px; color: var(--muted); }
+.periodSelector { display: flex; gap: 2px; padding: 2px; border-radius: 5px; background: #f2f4f6; }
+.periodSelector button { border: 0; background: transparent; border-radius: 3px; padding: 5px 10px; font-size: 11px; color: var(--secondary); white-space: nowrap; }
+.periodSelector button[aria-pressed="true"] { color: var(--text); background: white; box-shadow: 0 0 0 1px var(--border); font-weight: 500; }
+.chartLegend { display: flex; align-items: center; gap: 16px; margin: 16px 0 8px; }
+.chartLegend button { padding: 0; display: flex; align-items: center; gap: 6px; border: 0; background: transparent; font-size: 11px; color: var(--secondary); }
+.chartLegend button[aria-pressed="true"] { color: var(--text); font-weight: 600; }
+.chartLegend i { width: 12px; height: 2px; }
+.chartLegend > span { margin-left: auto; color: var(--muted); font-size: 10px; }
+.chartContainer { height: 184px; }
+.chartLoading { height: 100%; display: grid; place-items: center; font-size: 12px; color: var(--muted); }
+.chartFooter { font-size: 10px; color: var(--muted); padding: 10px 0 0 30px; }
+.pageFooter { display: flex; justify-content: space-between; gap: 12px; margin-top: 16px; font-size: 10px; color: var(--muted); }
+@media (min-width: 1700px) { .workspace { grid-template-columns: minmax(0,1fr) 400px; } }
+@media (max-width: 1250px) {
+  .summary { padding: 16px 20px; }
+  .equipmentIdentity { padding-right: 20px; }
+  .overall { padding: 0 20px; }
+  .stateCounts { gap: 12px; padding-left: 20px; }
+  .captureTime { display: none; }
+  .workspace { grid-template-columns: minmax(0,1fr) 360px; gap: 16px; }
+  .visualColumn { gap: 16px; }
+  .panelHeading, .pointDetail { padding-left: 20px; padding-right: 20px; }
+  .listHeader, .pointRow { column-gap: 10px; }
+  .trendPanel { padding: 20px; }
+  .chartHeading > div:first-child { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .chartLegend { gap: 12px; }
+  .chartLegend > span { display: none; }
+  .statusFacts { gap: 16px; }
+}
+@media (max-width: 1050px) {
+  .workspace { grid-template-columns: minmax(0,1fr); }
+  .pointPanel { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+  .pointPanel > .panelHeading { grid-column: 1; }
+  .pointList { grid-column: 1; }
+  .pointDetail { grid-column: 2; grid-row: 1 / span 2; border-top: 0; border-left: 1px solid var(--border); }
+  .chartHeading > div:first-child { flex-direction: row; align-items: center; gap: 12px; }
+  .summary { flex-wrap: wrap; }
+  .stateCounts { gap: 20px; }
+  .stateCounts > div { min-width: 40px; }
+}
+@media (max-width: 760px) {
+  .summary { gap: 16px; }
+  .equipmentIdentity { padding-right: 0; }
+  .overall { padding: 0 0 0 16px; }
+  .stateCounts { width: 100%; grid-template-columns: repeat(4,1fr); border-left: 0; padding: 16px 0 0; border-top: 1px solid var(--border); }
+  .pointPanel { display: block; }
+  .pointDetail { border-left: 0; border-top: 1px solid var(--border); }
+  .pointText > span { overflow: visible; }
+  .pageFooter > span:last-child { display: none; }
+}
+@media (max-width: 600px) {
+  .pageHeading { margin-bottom: 16px; }
+  .pageHeading h1 { font-size: 21px; }
+  .pageHeading p { font-size: 12px; }
+  .pageHeading > button { font-size: 11px; padding: 6px 8px; white-space: nowrap; }
+  .sampleNotice { align-items: flex-start; font-size: 11px; }
+  .sampleBadge { padding-top: 1px; }
+  .summary { margin-bottom: 16px; }
+  .panelHeading { padding: 14px 16px; min-height: 52px; }
+  .panelHeading h2 { font-size: 14px; }
+  .legend { gap: 8px; font-size: 10px; }
+  .pointDetail { padding: 20px 16px; }
+  .listHeader, .pointRow { grid-template-columns: 20px minmax(0,1fr) 36px 36px; column-gap: 10px; padding-right: 16px; }
+  .listHeader { padding-left: 18px; }
+  .pointRow { padding-left: 16px; }
+  .pointRow + .pointRow::before { left: 18px; right: 16px; }
+  .pointText > strong { font-size: 13px; }
+  .pointText > span { font-size: 11px; overflow: hidden; }
+  .pointHi { font-size: 14px; }
+  .trendPanel { padding: 16px; }
+  .chartHeading > div:first-child { gap: 8px; }
+  .chartHeading span { font-size: 10px; }
+  .periodSelector button { padding: 5px 8px; }
+  .chartLegend { gap: 16px; }
+  .chartContainer { height: 168px; }
+  .chartFooter { font-size: 9px; }
+}

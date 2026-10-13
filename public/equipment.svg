@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 400" fill="none">
+  <title>커팅기 진단 위치를 나타내는 개념 구조도</title>
+  <g stroke-linejoin="round">
+    <path d="M180 343H686M237 359H630" stroke="#E5E8EB"/>
+    <path d="m254 316 233 0 43-22H298Z" fill="#D1D6DB" stroke="#8B95A1"/>
+    <path d="M254 316h233v20H254Z" fill="#B0B8C1" stroke="#8B95A1"/>
+    <path d="m487 316 43-22v20l-43 22Z" fill="#8B95A1" stroke="#6B7684"/>
+    <path d="m270 111 32-17h32v204l-32 17-32-19Z" fill="#8B95A1" stroke="#6B7684"/>
+    <path d="M270 111h32v204h-32Z" fill="#4E5968" stroke="#333D4B"/>
+    <path d="m466 111 33-17h32v204l-33 17-32-19Z" fill="#8B95A1" stroke="#6B7684"/>
+    <path d="M466 111h33v204h-33Z" fill="#4E5968" stroke="#333D4B"/>
+    <path d="m254 107 40-20h222l-40 20Z" fill="#8B95A1" stroke="#6B7684"/>
+    <path d="M254 107h222v31H254Z" fill="#6B7684" stroke="#4E5968"/>
+    <path d="m476 107 40-20v31l-40 20Z" fill="#4E5968" stroke="#333D4B"/>
+    <path d="M326 40h15v225h-15Zm109 0h15v225h-15Z" fill="#D1D6DB" stroke="#8B95A1"/>
+    <path d="M330 40h4v225m105-225h4v225" stroke="#F9FAFB" stroke-width="2"/>
+    <path d="m316 39 19-10h119l-19 10Z" fill="#8B95A1" stroke="#6B7684"/>
+    <path d="M316 39h119v12H316Z" fill="#4E5968" stroke="#333D4B"/>
+    <path d="m435 39 19-10v12l-19 10Z" fill="#6B7684" stroke="#4E5968"/>
+    <path d="M361 51h42v70h-42Z" fill="#B0B8C1" stroke="#6B7684"/>
+    <path d="M403 51h11v70h-11Z" fill="#6B7684" stroke="#4E5968"/>
+    <path d="M370 56h5v59m7-59h5v59" stroke="#E5E8EB" stroke-width="3"/>
+    <path d="M375 121h16v49h-16Z" fill="#D1D6DB" stroke="#8B95A1"/>
+    <path d="M379 121h4v49" stroke="#F9FAFB" stroke-width="2"/>
+    <path d="M414 64c26 0 30 18 30 39v37" stroke="#4E5968" stroke-width="5"/>
+    <path d="M414 70c18 0 23 13 23 29v37" stroke="#B0B8C1" stroke-width="3"/>
+    <path d="m310 168 23-12h117l-23 12Z" fill="#D1D6DB" stroke="#8B95A1"/>
+    <path d="M310 168h117v25H310Z" fill="#B0B8C1" stroke="#8B95A1"/>
+    <path d="m427 168 23-12v25l-23 12Z" fill="#8B95A1" stroke="#6B7684"/>
+    <path d="M315 193h106l-12 14h-83Z" fill="#4E5968" stroke="#333D4B"/>
+    <path d="M329 202h77" stroke="#E5E8EB" stroke-width="2"/>
+    <path d="m307 246 25-13h123l-25 13Z" fill="#E5E8EB" stroke="#8B95A1"/>
+    <path d="M307 246h123v17H307Z" fill="#8B95A1" stroke="#6B7684"/>
+    <path d="m430 246 25-13v17l-25 13Z" fill="#6B7684" stroke="#4E5968"/>
+    <path d="M318 210v26m101-26v26" stroke="#8B95A1" stroke-width="7"/>
+    <rect x="309" y="268" width="45" height="44" rx="3" fill="#6B7684" stroke="#4E5968"/>
+    <path d="m354 268 15-9v44l-15 9Z" fill="#4E5968" stroke="#333D4B"/>
+    <path d="M315 275h32m-32 6h32m-32 6h32m-32 6h32m-32 6h32" stroke="#B0B8C1" stroke-width="2"/>
+    <circle cx="369" cy="286" r="13" fill="#B0B8C1" stroke="#8B95A1"/>
+    <circle cx="369" cy="286" r="5" fill="#6B7684"/>
+    <path d="M382 286h48" stroke="#8B95A1" stroke-width="6"/>
+    <path d="m450 241 45-23h162l-45 23Z" fill="#D1D6DB" stroke="#8B95A1"/>
+    <path d="M450 241h162v16H450Z" fill="#B0B8C1" stroke="#8B95A1"/>
+    <path d="m612 241 45-23v16l-45 23Z" fill="#8B95A1" stroke="#6B7684"/>
+    <path d="M508 257v60h11v-60m77 0v60h11v-60" fill="#B0B8C1" stroke="#8B95A1"/>
+    <path d="m644 234 0 65h9v-70" fill="#8B95A1" stroke="#6B7684"/>
+    <path d="m503 232 24-12h110l-24 12Z" fill="#F9FAFB" stroke="#B0B8C1"/>
+    <path d="M501 247h115m-114 8h114" stroke="#6B7684" stroke-width="2"/>
+    <g stroke="#8B95A1" stroke-width="5"><path d="m518 237 25-14m-7 14 25-14m-7 14 25-14m-7 14 25-14m-7 14 25-14"/></g>
+    <g fill="#333D4B"><circle cx="269" cy="119" r="3"/><circle cx="458" cy="119" r="3"/><circle cx="269" cy="130" r="3"/><circle cx="458" cy="130" r="3"/><circle cx="319" cy="179" r="2"/><circle cx="418" cy="179" r="2"/></g>
+    <path d="M380 82H220m148 113H172m149 106H180m411-61h83" stroke="#B0B8C1" stroke-width="1" stroke-dasharray="3 3"/>
+  </g>
+</svg>
